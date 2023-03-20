@@ -4,12 +4,13 @@ import {LoginComponent} from './login/login.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {NotfoundComponent} from './notfound/notfound.component';
 import {NavbarComponent} from "./navbar/navbar.component";
+import {ClientesComponent} from "./clientes/clientes.component";
 
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
+    {path:'clientes', component:ClientesComponent},
     {path: 'dashboard', component:DashboardComponent},
-    {path:'**', component:NotfoundComponent}
 ];
 
 @NgModule({
