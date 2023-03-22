@@ -43,6 +43,6 @@ export class ClientesComponent implements OnInit {
 
   actualizar(cliente:any){
     localStorage.setItem("temp", JSON.stringify(cliente));
-
+    location.href="/actualizarCliente";
   }
 }

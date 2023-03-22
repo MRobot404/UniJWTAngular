@@ -11,9 +11,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ClientesComponent } from './clientes/clientes.component';
+import { ActualizarClienteComponent } from './actualizar-cliente/actualizar-cliente.component';
+import { CrearClientesComponent } from './crear-clientes/crear-clientes.component';
+
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent, NotfoundComponent, NavbarComponent, ClientesComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, NotfoundComponent, NavbarComponent, ClientesComponent, ActualizarClienteComponent, CrearClientesComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [  {
     provide: HTTP_INTERCEPTORS,

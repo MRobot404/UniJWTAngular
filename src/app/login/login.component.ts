@@ -8,7 +8,10 @@ import { LoginService } from '../Services/login.service';
 export class LoginComponent implements OnInit {
   usuario: any = {};
   errorInicio: boolean = false;
-  ngOnInit(): void {}
+  usuarioLogueado: boolean = false;
+  ngOnInit(): void {
+    this.usuarioLogueado = false;
+  }
 
   constructor(private loginServices: LoginService) {}
 
@@ -25,8 +28,10 @@ export class LoginComponent implements OnInit {
 
   loginProcess(user: any) {
     if (user.token) {
-      localStorage.setItem("usuario", JSON.stringify(user));
-      location.href="/dashboard"
+      localStorage.setItem('usuario', JSON.stringify(user));
+      this.usuarioLogueado = true;
+      localStorage.setItem('usuarioLogueado', this.usuarioLogueado.toString());
+      location.href = '/dashboard';
     } else {
       this.errorInicio = true;
     }
