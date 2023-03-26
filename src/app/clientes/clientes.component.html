@@ -1,78 +1,63 @@
 <app-navbar></app-navbar>
 <div class="progress" *ngIf="cargar">
-  <div
-    class="progress-bar progress-bar-striped progress-bar-animated"
-    role="progressbar"
-    aria-valuenow="100"
-    style="width: 100%"
-  ></div>
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100"
+    style="width: 100%"></div>
 </div>
-<div class="row">
-  <div class="col-md-12">
-    <hr />
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Dpi</th>
-          <th>Nombre</th>
-          <th>Primer Apellido</th>
-          <th>Segundo Apellido</th>
-          <th>Clase Via</th>
-          <th>Nombre Via</th>
-          <th>Número Via</th>
-          <th>Código Postal</th>
-          <th>Ciudad</th>
-          <th>Teléfono</th>
-          <th>Observaciones</th>
-          <th>Seguros</th>
-          <th>Eliminar y actualizar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cliente of clientes">
-          <th scope="row">{{ cliente.dpiCliente }}</th>
-          <th scope="row">{{ cliente.nombreCL }}</th>
-          <th scope="row">{{ cliente.apellido1 }}</th>
-          <th scope="row">{{ cliente.apellido2 }}</th>
-          <th scope="row">{{ cliente.claseVia }}</th>
-          <th scope="row">{{ cliente.nombreVia }}</th>
-          <th scope="row">{{ cliente.numeroVia }}</th>
-          <th scope="row">{{ cliente.codPostal }}</th>
-          <th scope="row">{{ cliente.ciudad }}</th>
-          <th scope="row">{{ cliente.telefono }}</th>
-          <th scope="row">{{ cliente.Observaciones }}</th>
-          <th scope="row">
-            <ul *ngFor="let seguro of cliente.seguroslist">
-              <li>Numero poliza: {{ seguro.numeroPoliza }}</li>
-              <li>Ramo:{{ seguro.ramo }}</li>
-              <li>Fecha Inicio: {{ seguro.fechaInicio | date:'shortDate'}}</li>
-              <li>Fecha Vencimiento: {{ seguro.fechaVencimiento | date:'shortDate' }}</li>
-              <li>
-                Condiciones particulares: {{ seguro.condicionesParticulares }}
-              </li>
-              <li>Observaciones: {{ seguro.observaciones }}</li>
-            </ul>
-          </th>
-          <th scope="row">
-            <button
-              type="button"
-              class="btn btn-danger"
-              (click)="eliminar(cliente)"
-            >
-              Eliminar
-            </button>
-            <br /> 
-            &nbsp;
-            <button
-              type="button"
-              class="btn btn-warning"
-              (click)="actualizar(cliente)"
-            >
-              Actualizar
-            </button>
-          </th>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="card">
+  <p-table [value]="clientes" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[1,2,3,5, 10, 25, 50]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Dpi</th>
+        <th>Nombre</th>
+        <th>Primer Apellido</th>
+        <th>Segundo Apellido</th>
+        <th>Clase Via</th>
+        <th>Nombre Via</th>
+        <th>Número Via</th>
+        <th>Código Postal</th>
+        <th>Ciudad</th>
+        <th>Teléfono</th>
+        <th>Observaciones</th>
+        <th>Seguros</th>
+        <th>Eliminar y actualizar</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cliente>
+      <tr>
+        <td>{{ cliente.dpiCliente }}</td>
+        <td>{{cliente.nombreCL}}</td>
+        <td>{{cliente.apellido1}}</td>
+        <td>{{cliente.apellido2}}</td>
+        <td>{{cliente.claseVia}}</td>
+        <td>{{cliente.nombreVia}}</td>
+        <td>{{cliente.numeroVia}}</td>
+        <td>{{cliente.codPostal}}</td>
+        <td>{{cliente.ciudad}}</td>
+        <td>{{cliente.telefono}}</td>
+        <td>{{cliente.Observaciones}}</td>
+        <td>
+          <ul *ngFor="let seguro of cliente.seguroslist">
+            <li>Numero poliza: {{ seguro.numeroPoliza }}</li>
+            <li>Ramo:{{ seguro.ramo }}</li>
+            <li>Fecha Inicio: {{ seguro.fechaInicio | date:'shortDate'}}</li>
+            <li>Fecha Vencimiento: {{ seguro.fechaVencimiento | date:'shortDate' }}</li>
+          </ul>
+        </td>
+        <td scope="row">
+          <button type="button" class="btn btn-danger" (click)="eliminar(cliente)">
+            Eliminar
+          </button>
+          <br />
+          &nbsp;
+          <br>
+          <button type="button" class="btn btn-warning" (click)="actualizar(cliente)">
+            Actualizar
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
 </div>

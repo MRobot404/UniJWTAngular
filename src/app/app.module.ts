@@ -13,11 +13,16 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { ActualizarClienteComponent } from './actualizar-cliente/actualizar-cliente.component';
 import { CrearClientesComponent } from './crear-clientes/crear-clientes.component';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, DashboardComponent, NotfoundComponent, NavbarComponent, ClientesComponent, ActualizarClienteComponent, CrearClientesComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ButtonModule, TableModule, PaginatorModule,BrowserAnimationsModule,],
   providers: [  {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,

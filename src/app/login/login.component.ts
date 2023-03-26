@@ -10,6 +10,7 @@ export class LoginComponent implements OnInit {
   errorInicio: boolean = false;
   usuarioLogueado: boolean = false;
   ngOnInit(): void {
+    localStorage.clear();
     this.usuarioLogueado = false;
   }
 

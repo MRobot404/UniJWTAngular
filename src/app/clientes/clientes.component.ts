@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteserviceService } from '../Services/clienteservice.service';
 
+
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
@@ -9,6 +10,11 @@ import { ClienteserviceService } from '../Services/clienteservice.service';
 export class ClientesComponent implements OnInit {
   clientes: any = [];
   cargar: boolean = false;
+   currentPage: number = 0;
+  rowsPerPage: number = 1000;
+
+  
+  
   ngOnInit(): void {
     this.buscarClientes();
   }
@@ -17,14 +23,14 @@ export class ClientesComponent implements OnInit {
   buscarClientes() {
     this.cargar = true;
     this.clientesService
-      .buscarClientes()
+      .buscarClientes(this.currentPage, this.rowsPerPage)
       .subscribe((data: any) => this.mostrarClientes(data));
   }
 
   mostrarClientes(response: any) {
     this.cargar = false;
     this.clientes = response;
-    console.log(this.clientes);
+      console.log(this.clientes);
   }
 
   eliminar(cliente: any) {

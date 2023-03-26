@@ -10,9 +10,9 @@ export class ClienteserviceService {
   private readonly URL = '/auth/clientes/';
 
   constructor(private http: HttpClient) {}
-  buscarClientes(): Observable<any> {
+  buscarClientes(currentPage:any,rowsPerPage:any): Observable<any> {
     return this.http
-      .get<any>(this.URL + 'buscar')
+      .get<any>(this.URL + 'paginar?page='+currentPage+"&size="+rowsPerPage)
       .pipe(catchError((e) => 'e '));
   }
 
