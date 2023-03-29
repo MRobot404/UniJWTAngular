@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
   usuario: any;
@@ -13,11 +13,10 @@ export class NavbarComponent {
     if (temp) {
       this.usuario = JSON.parse(temp);
     } else {
-      this.logout();
     }
   }
-  logout(){
+  logout() {
     localStorage.clear();
-    location.href="";
+    location.href = '';
   }
 }
