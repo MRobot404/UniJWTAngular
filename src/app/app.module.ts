@@ -17,12 +17,16 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CargaClienteComponent } from './carga-cliente/carga-cliente.component';
+import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
+import { PasswordModule } from 'primeng/password';
 
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent, NotfoundComponent, NavbarComponent, ClientesComponent, ActualizarClienteComponent, CrearClientesComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ButtonModule, TableModule, PaginatorModule,BrowserAnimationsModule,],
+  declarations: [AppComponent, LoginComponent, DashboardComponent, NotfoundComponent, NavbarComponent, ClientesComponent, ActualizarClienteComponent, CrearClientesComponent, CargaClienteComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ButtonModule, TableModule, PaginatorModule,BrowserAnimationsModule,MessagesModule, ToastModule, PasswordModule],
   providers: [  {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,

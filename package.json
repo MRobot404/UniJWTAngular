@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
     "@popperjs/core": "^2.11.6",
+    "@types/xlsx": "^0.0.36",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
@@ -26,6 +27,7 @@
     "primeicons": "^6.0.1",
     "primeng": "^15.2.1",
     "rxjs": "~7.8.0",
+    "ts-xlsx": "^0.0.11",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },

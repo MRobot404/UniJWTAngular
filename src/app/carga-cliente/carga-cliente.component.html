@@ -1,0 +1,165 @@
+<app-navbar></app-navbar>
+<form *ngIf="form" id="file-upload-form" class="uploader">
+  <input id="file-upload" type="file" (change)="fileUpload($event)" name="fileUpload" accept=".xls,.xlsx">
+  <label for="file-upload" id="file-drag">
+    <i class="glyphicon glyphicon-upload" id="file-icon"></i>
+    <span>Arrastra y suelta tu archivo aquí<br>o haz clic para seleccionarlo</span>
+    <span id="file-name"></span>
+  </label>
+</form>
+<div *ngIf="tabla" class="card">
+  <p-table [value]="clientes" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:25%">DPI</th>
+        <th style="width:25%">Nombre</th>
+        <th style="width:25%">Primer Apellido</th>
+        <th style="width:25%">Segundo Apellido</th>
+        <th style="width:25%">Clase Via</th>
+        <th style="width:25%">Nombre Via</th>
+        <th style="width:25%">Número Via</th>
+        <th style="width:25%">Codigo Postal</th>
+        <th style="width:25%">Ciudad</th>
+        <th style="width:25%">Telefono</th>
+        <th style="width:25%">Observaciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cliente let-editing="editing">
+      <tr>
+        <td [pEditableColumn]="cliente.dpi_cliente
+                " pEditableColumnField="code">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="number" [(ngModel)]="cliente.dpi_cliente
+                            " />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ cliente.dpi_cliente }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td [pEditableColumn]="cliente.nombre_cl
+        " pEditableColumnField="code">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="cliente.nombre_cl
+                    " />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ cliente.nombre_cl }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td [pEditableColumn]="cliente.apellido1
+        " pEditableColumnField="code">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="cliente.apellido1
+                    " />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ cliente.apellido1 }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td [pEditableColumn]="cliente.apellido2
+        " pEditableColumnField="code">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="cliente.apellido2
+                    " />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ cliente.apellido2 }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td [pEditableColumn]="cliente.clase_via
+        " pEditableColumnField="code">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="cliente.clase_via
+                    " />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ cliente.clase_via }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td [pEditableColumn]="cliente.nombre_via
+        " pEditableColumnField="code">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="cliente.nombre_via
+                    " />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ cliente.nombre_via }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td [pEditableColumn]="cliente.numero_via
+        " pEditableColumnField="code">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="number" [(ngModel)]="cliente.numero_via
+                    " />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ cliente.numero_via }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td [pEditableColumn]="cliente.cod_postal
+        " pEditableColumnField="code">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="cliente.cod_postal
+                    " />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ cliente.cod_postal }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td [pEditableColumn]="cliente.ciudad
+        " pEditableColumnField="code">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="cliente.ciudad
+                    " />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ cliente.ciudad }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td [pEditableColumn]="cliente.telefono
+        " pEditableColumnField="code">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="number" [(ngModel)]="cliente.telefono
+                    " />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ cliente.telefono}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td [pEditableColumn]="cliente.observaciones
+        " pEditableColumnField="code">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="cliente.observaciones
+                    " />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ cliente.observaciones}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<p-toast></p-toast>

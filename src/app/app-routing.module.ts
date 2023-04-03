@@ -7,6 +7,7 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { ActualizarClienteComponent } from './actualizar-cliente/actualizar-cliente.component';
 import { GuardGuard } from './guard.guard';
 import { CrearClientesComponent } from './crear-clientes/crear-clientes.component';
+import { CargaClienteComponent } from './carga-cliente/carga-cliente.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -22,14 +23,20 @@ const routes: Routes = [
     canActivate: [GuardGuard],
   },
   {
-    path: '**',
-    component: NotfoundComponent
-  },
-  {
     path: 'crearCliente',
     component: CrearClientesComponent,
     canActivate: [GuardGuard],
-  }
+  },
+  {
+    path:'cargarCliente',
+    component: CargaClienteComponent,
+    canActivate: [GuardGuard]
+  },
+  {
+    path: '**',
+    component: NotfoundComponent
+  },
+
 ];
 
 @NgModule({
