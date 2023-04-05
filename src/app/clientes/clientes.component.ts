@@ -51,6 +51,7 @@ export class ClientesComponent implements OnInit {
       (response: any) => {
         console.log(response);
         this.actualizarPagina(this.tempPage, this.sizePage);
+        this.cargar = false;
       },
       (error: any) => {
         console.error(error);

@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+<p-toast></p-toast>
 <form *ngIf="form" id="file-upload-form" class="uploader">
   <input id="file-upload" type="file" (change)="fileUpload($event)" name="fileUpload" accept=".xls,.xlsx">
   <label for="file-upload" id="file-drag">
@@ -8,158 +9,224 @@
   </label>
 </form>
 <div *ngIf="tabla" class="card">
-  <p-table [value]="clientes" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
+  <p-table #dt1 [value]="clientes" dataKey="id" editMode="row" [tableStyle]="{ 'min-width': '50rem' }"
+    [paginator]="true" [rows]="sizePage" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[1,2,3,5,10]"
+    [globalFilterFields]="['dpiCliente', 'country.name', 'representative.name', 'status']">
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+      </div>
+    </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th style="width:25%">DPI</th>
-        <th style="width:25%">Nombre</th>
-        <th style="width:25%">Primer Apellido</th>
-        <th style="width:25%">Segundo Apellido</th>
-        <th style="width:25%">Clase Via</th>
-        <th style="width:25%">Nombre Via</th>
-        <th style="width:25%">Número Via</th>
-        <th style="width:25%">Codigo Postal</th>
-        <th style="width:25%">Ciudad</th>
-        <th style="width:25%">Telefono</th>
-        <th style="width:25%">Observaciones</th>
+        <th pSortableColumn="dpiCliente" style="min-width: 8rem">
+          <div class="flex justify-content-between align-items-center">
+            DPI
+            <p-sortIcon field="dpiCliente"></p-sortIcon>
+            <p-columnFilter type="text" field="dpiCliente" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="nombreCL" style="min-width: 8rem">
+          <div class="flex justify-content-between align-items-center">
+            Nombre
+            <p-sortIcon field="nombreCL"></p-sortIcon>
+            <p-columnFilter type="text" field="nombreCL" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="apellido1" style="min-width: 8rem">
+          <div class="flex justify-content-between align-items-center">
+            Primer Apellido
+            <p-sortIcon field="apellido1"></p-sortIcon>
+            <p-columnFilter type="text" field="apellido1" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="apellido2" style="min-width: 8rem">
+          <div class="flex justify-content-between align-items-center">
+            Segundo Apellido
+            <p-sortIcon field="apellido2"></p-sortIcon>
+            <p-columnFilter type="text" field="apellido2" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="claseVia" style="min-width: 8rem">
+          <div class="flex justify-content-between align-items-center">
+            Clase Via
+            <p-sortIcon field="claseVia"></p-sortIcon>
+            <p-columnFilter type="text" field="claseVia" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="nombreVia" style="min-width: 8rem">
+          <div class="flex justify-content-between align-items-center">
+            Nombre Via
+            <p-sortIcon field="nombreVia"></p-sortIcon>
+            <p-columnFilter type="text" field="nombreVia" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="numeroVia" style="min-width: 8rem">
+          <div class="flex justify-content-between align-items-center">
+            Número Via
+            <p-sortIcon field="numeroVia"></p-sortIcon>
+            <p-columnFilter type="text" field="numeroVia" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="codPostal" style="min-width: 8rem">
+          <div class="flex justify-content-between align-items-center">
+            Codigo Postal
+            <p-sortIcon field="codPostal"></p-sortIcon>
+            <p-columnFilter type="text" field="codPostal" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="ciudad" style="min-width: 8rem">
+          <div class="flex justify-content-between align-items-center">
+            Ciudad
+            <p-sortIcon field="ciudad"></p-sortIcon>
+            <p-columnFilter type="text" field="ciudad" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="telefono" style="min-width: 8rem">
+          <div class="flex justify-content-between align-items-center">
+            Telefono
+            <p-sortIcon field="telefono"></p-sortIcon>
+            <p-columnFilter type="text" field="telefono" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="observaciones" style="min-width: 8rem">
+          <div class="flex justify-content-between align-items-center">
+            Observaciones
+            <p-sortIcon field="observaciones"></p-sortIcon>
+            <p-columnFilter type="text" field="observaciones" display="menu" class="ml-auto"></p-columnFilter>
+          </div>
+        </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-cliente let-editing="editing">
-      <tr>
-        <td [pEditableColumn]="cliente.dpi_cliente
-                " pEditableColumnField="code">
+    <ng-template pTemplate="body" let-cliente let-editing="editing" let-ri="rowIndex">
+      <tr [pEditableRow]="cliente">
+        <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="number" [(ngModel)]="cliente.dpi_cliente
-                            " />
+              <input pInputText type="number" [(ngModel)]="cliente.dpiCliente">
             </ng-template>
             <ng-template pTemplate="output">
-              {{ cliente.dpi_cliente }}
+              {{cliente.dpiCliente}}
             </ng-template>
           </p-cellEditor>
         </td>
-        <td [pEditableColumn]="cliente.nombre_cl
-        " pEditableColumnField="code">
+        <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="cliente.nombre_cl
-                    " />
+              <input pInputText type="text" [(ngModel)]="cliente.nombreCL">
             </ng-template>
             <ng-template pTemplate="output">
-              {{ cliente.nombre_cl }}
+              {{cliente.nombreCL}}
             </ng-template>
           </p-cellEditor>
         </td>
-        <td [pEditableColumn]="cliente.apellido1
-        " pEditableColumnField="code">
+        <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="cliente.apellido1
-                    " />
+              <input pInputText type="text" [(ngModel)]="cliente.apellido1">
             </ng-template>
             <ng-template pTemplate="output">
-              {{ cliente.apellido1 }}
+              {{cliente.apellido1}}
             </ng-template>
           </p-cellEditor>
         </td>
-        <td [pEditableColumn]="cliente.apellido2
-        " pEditableColumnField="code">
+        <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="cliente.apellido2
-                    " />
+              <input pInputText type="text" [(ngModel)]="cliente.apellido2">
             </ng-template>
             <ng-template pTemplate="output">
-              {{ cliente.apellido2 }}
+              {{cliente.apellido2}}
             </ng-template>
           </p-cellEditor>
         </td>
-        <td [pEditableColumn]="cliente.clase_via
-        " pEditableColumnField="code">
+        <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="cliente.clase_via
-                    " />
+              <input pInputText type="text" [(ngModel)]="cliente.claseVia">
             </ng-template>
             <ng-template pTemplate="output">
-              {{ cliente.clase_via }}
+              {{cliente.claseVia}}
             </ng-template>
           </p-cellEditor>
         </td>
-        <td [pEditableColumn]="cliente.nombre_via
-        " pEditableColumnField="code">
+        <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="cliente.nombre_via
-                    " />
+              <input pInputText type="text" [(ngModel)]="cliente.nombreVia">
             </ng-template>
             <ng-template pTemplate="output">
-              {{ cliente.nombre_via }}
+              {{cliente.nombreVia}}
             </ng-template>
           </p-cellEditor>
         </td>
-        <td [pEditableColumn]="cliente.numero_via
-        " pEditableColumnField="code">
+        <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="number" [(ngModel)]="cliente.numero_via
-                    " />
+              <input pInputText type="text" [(ngModel)]="cliente.numeroVia">
             </ng-template>
             <ng-template pTemplate="output">
-              {{ cliente.numero_via }}
+              {{cliente.numeroVia}}
             </ng-template>
           </p-cellEditor>
         </td>
-        <td [pEditableColumn]="cliente.cod_postal
-        " pEditableColumnField="code">
+        <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="cliente.cod_postal
-                    " />
+              <input pInputText type="text" [(ngModel)]="cliente.codPostal">
             </ng-template>
             <ng-template pTemplate="output">
-              {{ cliente.cod_postal }}
+              {{cliente.codPostal}}
             </ng-template>
           </p-cellEditor>
         </td>
-        <td [pEditableColumn]="cliente.ciudad
-        " pEditableColumnField="code">
+        <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="cliente.ciudad
-                    " />
+              <input pInputText type="text" [(ngModel)]="cliente.ciudad">
             </ng-template>
             <ng-template pTemplate="output">
-              {{ cliente.ciudad }}
+              {{cliente.ciudad}}
             </ng-template>
           </p-cellEditor>
         </td>
-        <td [pEditableColumn]="cliente.telefono
-        " pEditableColumnField="code">
+        <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="number" [(ngModel)]="cliente.telefono
-                    " />
+              <input pInputText type="text" [(ngModel)]="cliente.telefono">
             </ng-template>
             <ng-template pTemplate="output">
-              {{ cliente.telefono}}
+              {{cliente.telefono}}
             </ng-template>
           </p-cellEditor>
         </td>
-        <td [pEditableColumn]="cliente.observaciones
-        " pEditableColumnField="code">
+        <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="cliente.observaciones
-                    " />
+              <input pInputText type="text" [(ngModel)]="cliente.observaciones">
             </ng-template>
             <ng-template pTemplate="output">
-              {{ cliente.observaciones}}
+              {{cliente.observaciones}}
             </ng-template>
           </p-cellEditor>
+        </td>
+        <td>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
+              (click)="onRowEditInit(cliente)" class="p-button-rounded p-button-text"></button>
+            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
+              (click)="onRowEditSave(cliente)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
+              (click)="onRowEditCancel(cliente, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+          </div>
         </td>
       </tr>
     </ng-template>
   </p-table>
 </div>
-<p-toast></p-toast>
+<div *ngIf="tabla" class="card d-flex justify-content-center">
+  <br>
+  <p-button label="Guardar" styleClass="p-button-success" [loading]="loading" (click)="guardar()"
+    class="text-center"></p-button>
+</div>
