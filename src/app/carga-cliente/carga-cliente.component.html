@@ -9,7 +9,7 @@
   </label>
 </form>
 <div *ngIf="tabla" class="card">
-  <p-table #dt1 [value]="clientes" dataKey="id" editMode="row" [tableStyle]="{ 'min-width': '50rem' }"
+  <p-table #dt1 [value]="clientes" dataKey="dpiCliente" editMode="row" [tableStyle]="{ 'min-width': '50rem' }"
     [paginator]="true" [rows]="sizePage" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[1,2,3,5,10]"
     [globalFilterFields]="['dpiCliente', 'country.name', 'representative.name', 'status']">
@@ -24,7 +24,7 @@
           <div class="flex justify-content-between align-items-center">
             DPI
             <p-sortIcon field="dpiCliente"></p-sortIcon>
-            <p-columnFilter type="text" field="dpiCliente" display="menu" class="ml-auto"></p-columnFilter>
+            <p-columnFilter type="number"field="dpiCliente" display="menu" class="ml-auto"></p-columnFilter>
           </div>
         </th>
         <th pSortableColumn="nombreCL" style="min-width: 8rem">
